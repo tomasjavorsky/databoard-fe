@@ -1,5 +1,19 @@
-import { createRootRoute } from '@tanstack/react-router'
+import { createRootRoute, Link, Outlet } from '@tanstack/react-router'
 
 export const Route = createRootRoute({
-  component: () => <h1>Hello World</h1>,
+  component: RootLayout,
 })
+
+function RootLayout() {
+  return (
+    <>
+      <nav>
+        <Link to="/" activeOptions={{ exact: true }}>
+          Overview
+        </Link>
+        <Link to="/about">About</Link>
+      </nav>
+      <Outlet />
+    </>
+  )
+}
