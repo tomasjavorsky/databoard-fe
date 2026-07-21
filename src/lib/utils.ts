@@ -9,3 +9,8 @@ export function cn(...inputs: ClassValue[]) {
 export function slugify(value: string) {
   return value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
 }
+
+// Formats a "YYYY-MM-DD" date string using the Czech default date format
+export function formatDate(value: string) {
+  return new Date(value).toLocaleDateString('cs-CZ')
+}

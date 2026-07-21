@@ -2,13 +2,21 @@ import { createFileRoute } from '@tanstack/react-router'
 import type { ColumnDef } from '@tanstack/react-table'
 
 import { DataTable } from '@/components/DataTable'
+import { Badge } from '@/components/ui/badge'
 import {
   HoverCard,
   HoverCardContent,
   HoverCardTrigger,
 } from '@/components/ui/hover-card'
 import { dummyVegetables, type Vegetable } from '@/data/dummyData'
-import { slugify } from '@/lib/utils'
+import { formatDate, slugify } from '@/lib/utils'
+
+const statusVariant: Record<Vegetable['status'], 'growing' | 'ready' | 'harvested' | 'needs-attention'> = {
+  growing: 'growing',
+  ready: 'ready',
+  harvested: 'harvested',
+  'needs attention': 'needs-attention',
+}
 
 const columns: ColumnDef<Vegetable>[] = [
   {
@@ -42,9 +50,25 @@ const columns: ColumnDef<Vegetable>[] = [
   { accessorKey: 'variety', header: 'Variety' },
   { accessorKey: 'zone', header: 'Zone' },
   { accessorKey: 'quantity', header: 'Quantity' },
-  { accessorKey: 'plantedDate', header: 'Planted' },
-  { accessorKey: 'harvestReadyDate', header: 'Harvest Ready' },
-  { accessorKey: 'status', header: 'Status' },
+  {
+    accessorKey: 'plantedDate',
+    header: 'Planted',
+    cell: ({ row }) => formatDate(row.original.plantedDate),
+  },
+  {
+    accessorKey: 'harvestReadyDate',
+    header: 'Harvest Ready',
+    cell: ({ row }) => formatDate(row.original.harvestReadyDate),
+  },
+  {
+    accessorKey: 'status',
+    header: 'Status',
+    cell: ({ row }) => (
+      <Badge variant={statusVariant[row.original.status]}>
+        {row.original.status}
+      </Badge>
+    ),
+  },
 ]
 
 const Index = () => {
