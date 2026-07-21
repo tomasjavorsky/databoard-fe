@@ -1,17 +1,43 @@
+import { Menu } from 'lucide-react'
 import { Link } from '@tanstack/react-router'
 import { Button } from '@/components/ui/button'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
 
 export const Navigation = () => {
   return (
     <nav className="flex gap-2 p-3">
-      <Button asChild variant="outline" className="data-[status=active]:bg-muted">
-        <Link to="/" activeOptions={{ exact: true }}>
-          Overview
-        </Link>
-      </Button>
-      <Button asChild variant="outline" className="data-[status=active]:bg-muted">
-        <Link to="/about">About</Link>
-      </Button>
+      <div className="hidden gap-2 sm:flex">
+        <Button asChild variant="outline" className="data-[status=active]:bg-muted">
+          <Link to="/" activeOptions={{ exact: true }}>
+            Overview
+          </Link>
+        </Button>
+        <Button asChild variant="outline" className="data-[status=active]:bg-muted">
+          <Link to="/about">About</Link>
+        </Button>
+      </div>
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild className="sm:hidden">
+          <Button variant="outline" size="icon" aria-label="Open menu">
+            <Menu />
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="start">
+          <DropdownMenuItem asChild>
+            <Link to="/" activeOptions={{ exact: true }}>
+              Overview
+            </Link>
+          </DropdownMenuItem>
+          <DropdownMenuItem asChild>
+            <Link to="/about">About</Link>
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
     </nav>
   )
 }
