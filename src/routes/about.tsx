@@ -6,6 +6,7 @@ const frontendLibraries = [
   'Typescript',
   'TanStack Router',
   'TanStack Table',
+  'TanStack Query',
   'Tailwind CSS',
   'shadcn/ui',
 ]

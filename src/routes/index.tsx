@@ -8,17 +8,18 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from '@/components/ui/hover-card'
-import { dummyVegetables, type Vegetable } from '@/data/dummyData'
+import type { Product } from '@/types/product'
+import { useProducts } from '@/hooks/useProducts'
 import { formatDate, slugify } from '@/lib/utils'
 
-const statusVariant: Record<Vegetable['status'], 'growing' | 'ready' | 'harvested' | 'needs-attention'> = {
+const statusVariant: Record<Product['status'], 'growing' | 'ready' | 'harvested' | 'needs-attention'> = {
   growing: 'growing',
   ready: 'ready',
   harvested: 'harvested',
   'needs attention': 'needs-attention',
 }
 
-const columns: ColumnDef<Vegetable>[] = [
+const columns: ColumnDef<Product>[] = [
   {
     id: 'icon',
     header: '',
@@ -72,10 +73,20 @@ const columns: ColumnDef<Vegetable>[] = [
 ]
 
 const Index = () => {
+  const { data, isPending, isError, error } = useProducts()
+
+  if (isPending) {
+    return <p className="text-sm text-muted-foreground">Loading vegetables…</p>
+  }
+
+  if (isError) {
+    return <p className="text-sm text-destructive">Failed to load vegetables: {error.message}</p>
+  }
+
   return (
     <div className="space-y-4">
       <h1 className="text-xl font-semibold">Warehouse Overview</h1>
-      <DataTable columns={columns} data={dummyVegetables} />
+      <DataTable columns={columns} data={data} />
     </div>
   )
 }
