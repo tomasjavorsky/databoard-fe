@@ -10,7 +10,7 @@ import {
 
 export const Navigation = () => {
   return (
-    <nav className="flex gap-2 p-3">
+    <nav className="mx-auto flex w-full max-w-screen-xl gap-2 p-3">
       <div className="hidden gap-2 sm:flex">
         <Button asChild variant="outline" className="data-[status=active]:bg-muted">
           <Link to="/" activeOptions={{ exact: true }}>
