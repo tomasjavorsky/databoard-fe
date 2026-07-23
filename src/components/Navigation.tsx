@@ -18,6 +18,9 @@ export const Navigation = () => {
           </Link>
         </Button>
         <Button asChild variant="outline" className="data-[status=active]:bg-muted">
+          <Link to="/chat">Chat</Link>
+        </Button>
+        <Button asChild variant="outline" className="data-[status=active]:bg-muted">
           <Link to="/about">About</Link>
         </Button>
       </div>
@@ -32,6 +35,9 @@ export const Navigation = () => {
             <Link to="/" activeOptions={{ exact: true }}>
               Overview
             </Link>
+          </DropdownMenuItem>
+          <DropdownMenuItem asChild>
+            <Link to="/chat">Chat</Link>
           </DropdownMenuItem>
           <DropdownMenuItem asChild>
             <Link to="/about">About</Link>
