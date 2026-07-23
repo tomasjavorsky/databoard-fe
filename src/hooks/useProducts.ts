@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query'
 import { graphqlRequest } from '@/lib/graphql-client'
 import type { Product } from '@/types/product'
 
-const PRODUCTS_QUERY = /* GraphQL */ `
+const PRODUCTS_QUERY = `
   query Products {
     products {
       id
