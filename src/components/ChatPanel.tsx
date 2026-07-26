@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import { createFileRoute } from '@tanstack/react-router'
 import { Bubble, BubbleContent, BubbleGroup } from '@/components/ui/bubble'
 import { Button } from '@/components/ui/button'
+import { ChatMarkdown } from '@/components/ChatMarkdown'
 import { useChat } from '@/hooks/useChat'
 
 const toolStatusLabel: Record<string, string> = {
@@ -10,11 +10,11 @@ const toolStatusLabel: Record<string, string> = {
   update_product: 'Updating product…',
 }
 
-const Chat = () => {
+export const ChatPanel = () => {
   const { messages, streamingText, toolStatus, isStreaming, error, sendMessage } = useChat()
   const [input, setInput] = useState('')
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = (event: React.SubmitEvent<HTMLFormElement>) => {
     event.preventDefault()
     const text = input.trim()
     if (!text || isStreaming) return
@@ -24,8 +24,6 @@ const Chat = () => {
 
   return (
     <div className="flex h-full flex-col gap-4">
-      <h1 className="text-xl font-semibold">Product Assistant</h1>
-
       <BubbleGroup className="flex-1 overflow-y-auto">
         {messages.map((message, index) => (
           <Bubble
@@ -33,13 +31,17 @@ const Chat = () => {
             align={message.role === 'user' ? 'end' : 'start'}
             variant={message.role === 'user' ? 'default' : 'muted'}
           >
-            <BubbleContent>{message.content}</BubbleContent>
+            <BubbleContent>
+              {message.role === 'assistant' ? <ChatMarkdown content={message.content} /> : message.content}
+            </BubbleContent>
           </Bubble>
         ))}
 
         {streamingText && (
           <Bubble align="start" variant="muted">
-            <BubbleContent>{streamingText}</BubbleContent>
+            <BubbleContent>
+              <ChatMarkdown content={streamingText} />
+            </BubbleContent>
           </Bubble>
         )}
 
@@ -77,7 +79,3 @@ const Chat = () => {
     </div>
   )
 }
-
-export const Route = createFileRoute('/chat')({
-  component: Chat,
-})

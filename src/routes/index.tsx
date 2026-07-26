@@ -1,8 +1,18 @@
+import { MessageCircle } from 'lucide-react'
 import { createFileRoute } from '@tanstack/react-router'
 import type { ColumnDef } from '@tanstack/react-table'
 
+import { ChatPanel } from '@/components/ChatPanel'
 import { DataTable } from '@/components/DataTable'
 import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import {
+  Drawer,
+  DrawerContent,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from '@/components/ui/drawer'
 import {
   HoverCard,
   HoverCardContent,
@@ -85,7 +95,25 @@ const Index = () => {
 
   return (
     <div className="space-y-4">
-      <h1 className="text-xl font-semibold">Warehouse Overview</h1>
+      <div className="flex items-center justify-between">
+        <h1 className="text-xl font-semibold">Warehouse Overview</h1>
+        <Drawer direction="right">
+          <DrawerTrigger asChild>
+            <Button variant="outline">
+              <MessageCircle />
+              Chat
+            </Button>
+          </DrawerTrigger>
+          <DrawerContent className="h-full">
+            <DrawerHeader>
+              <DrawerTitle>Product Assistant</DrawerTitle>
+            </DrawerHeader>
+            <div className="min-h-0 flex-1 p-4 pt-0">
+              <ChatPanel />
+            </div>
+          </DrawerContent>
+        </Drawer>
+      </div>
       <DataTable columns={columns} data={data} />
     </div>
   )
