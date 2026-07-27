@@ -95,26 +95,10 @@ const Index = () => {
 
   return (
     <div className="space-y-4">
-      <div className="flex items-center justify-between">
-        <h1 className="text-xl font-semibold">Warehouse Overview</h1>
-        <Drawer direction="right">
-          <DrawerTrigger asChild>
-            <Button variant="outline">
-              <MessageCircle />
-              Chat
-            </Button>
-          </DrawerTrigger>
-          <DrawerContent className="h-full">
-            <DrawerHeader>
-              <DrawerTitle>Product Assistant</DrawerTitle>
-            </DrawerHeader>
-            <div className="min-h-0 flex-1 p-4 pt-0">
-              <ChatPanel />
-            </div>
-          </DrawerContent>
-        </Drawer>
+      <h1 className="text-xl font-semibold mb-6">Warehouse Overview</h1>
+      <div className="bg-background shadow-[0px_0px_20px_5px_rgba(255,255,255,1)]">
+        <DataTable columns={columns} data={data} />
       </div>
-      <DataTable columns={columns} data={data} />
     </div>
   )
 }
