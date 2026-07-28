@@ -53,7 +53,7 @@ export const Navigation = () => {
           <DrawerHeader className="mb-4 bg-button-background rounded-tl-lg border-sidebar border-b-1 shadow-[2px_2px_0_0_var(--button-shadow)]">
             <DrawerTitle className="text-l text-center">Product Assistant</DrawerTitle>
           </DrawerHeader>
-          <div className="min-h-0 flex-1 p-4 pt-0">
+          <div className="min-h-0 flex-1 p-2 pr-0 pt-0">
             <ChatPanel />
           </div>
         </DrawerContent>

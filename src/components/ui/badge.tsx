@@ -20,13 +20,13 @@ const badgeVariants = cva(
           "hover:bg-muted hover:text-muted-foreground dark:hover:bg-muted/50",
         link: "text-primary underline-offset-4 hover:underline",
         growing:
-          "bg-blue-500/10 text-blue-600 [a]:hover:bg-blue-500/20 dark:bg-blue-500/20 dark:text-blue-400",
+          "bg-badge-growing/10 text-badge-growing [a]:hover:bg-badge-growing/20 dark:bg-badge-growing/20 shadow-[2px_2px_0_0_var(--badge-growing)]",
         ready:
-          "bg-emerald-500/10 text-emerald-600 [a]:hover:bg-emerald-500/20 dark:bg-emerald-500/20 dark:text-emerald-400",
+          "bg-badge-ready/10 text-badge-ready [a]:hover:bg-badge-ready/20 dark:bg-badge-ready/20 shadow-[2px_2px_0_0_var(--badge-ready)]",
         harvested:
-          "bg-muted text-muted-foreground [a]:hover:bg-muted/80",
+          "bg-badge-harvested/10 text-badge-harvested [a]:hover:bg-badge-harvested/80 shadow-[2px_2px_0_0_var(--badge-harvested)] dark:bg-badge-harvested/20 dark:[a]:hover:bg-badge-harvested/80",
         "needs-attention":
-          "bg-amber-500/10 text-amber-600 [a]:hover:bg-amber-500/20 dark:bg-amber-500/20 dark:text-amber-400",
+          "bg-badge-needs-attention/10 text-badge-needs-attention [a]:hover:bg-badge-needs-attention/20 dark:bg-badge-needs-attention/20 shadow-[2px_2px_0_0_var(--badge-needs-attention)]",
       },
     },
     defaultVariants: {

@@ -21,13 +21,20 @@ import {
 } from '@/components/ui/hover-card'
 import type { Product } from '@/types/product'
 import { useProducts } from '@/hooks/useProducts'
-import { formatDate, slugify } from '@/lib/utils'
+import { cn, daysUntil, formatDate, slugify } from '@/lib/utils'
 
 const statusVariant: Record<Product['status'], 'growing' | 'ready' | 'harvested' | 'needs-attention'> = {
   growing: 'growing',
   ready: 'ready',
   harvested: 'harvested',
   'needs attention': 'needs-attention',
+}
+
+const statusShadow: Record<Product['status'], string> = {
+  growing: 'shadow-[2px_2px_0_0_color-mix(in_srgb,var(--badge-growing)_50%,transparent)]',
+  ready: 'shadow-[2px_2px_0_0_color-mix(in_srgb,var(--badge-ready)_50%,transparent)]',
+  harvested: 'shadow-[2px_2px_0_0_color-mix(in_srgb,var(--badge-harvested)_50%,transparent)]',
+  'needs attention': 'shadow-[2px_2px_0_0_color-mix(in_srgb,var(--badge-needs-attention)_50%,transparent)]',
 }
 
 const columns: ColumnDef<Product>[] = [
@@ -44,7 +51,10 @@ const columns: ColumnDef<Product>[] = [
               alt={row.original.variety}
               width={20}
               height={20}
-              className="rounded-sm object-cover"
+              className={cn(
+                'rounded-sm object-cover border-1 border-background',
+                statusShadow[row.original.status],
+              )}
             />
           </HoverCardTrigger>
           <HoverCardContent side="right">
@@ -70,7 +80,21 @@ const columns: ColumnDef<Product>[] = [
   {
     accessorKey: 'harvestReadyDate',
     header: 'Harvest Ready',
-    cell: ({ row }) => formatDate(row.original.harvestReadyDate),
+    cell: ({ row }) => {
+      const remainingDays = daysUntil(row.original.harvestReadyDate)
+      return (
+        <span>
+          {formatDate(row.original.harvestReadyDate)}{' '}
+          <span className="text-muted-foreground">
+            {remainingDays > 0
+              ? `(in ${remainingDays}d)`
+              : remainingDays === 0
+                ? '(today)'
+                : `(${Math.abs(remainingDays)}d ago)`}
+          </span>
+        </span>
+      )
+    },
   },
   {
     accessorKey: 'status',

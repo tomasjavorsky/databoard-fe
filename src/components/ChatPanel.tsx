@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { CornerDownLeft } from 'lucide-react'
 import { Bubble, BubbleContent, BubbleGroup } from '@/components/ui/bubble'
 import { Button } from '@/components/ui/button'
 import { ChatMarkdown } from '@/components/ChatMarkdown'
@@ -13,6 +14,12 @@ const toolStatusLabel: Record<string, string> = {
 export const ChatPanel = () => {
   const { messages, streamingText, toolStatus, isStreaming, error, sendMessage } = useChat()
   const [input, setInput] = useState('')
+  const bubbleGroupRef = useRef<HTMLDivElement>(null)
+
+  //Auto scroll to the bottom of the chat when messages appear
+  useEffect(() => {
+    bubbleGroupRef.current?.scrollTo({ top: bubbleGroupRef.current.scrollHeight, behavior: 'smooth' })
+  }, [messages, streamingText, toolStatus, error])
 
   const handleSubmit = (event: React.SubmitEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -24,7 +31,7 @@ export const ChatPanel = () => {
 
   return (
     <div className="flex h-full flex-col gap-4">
-      <BubbleGroup className="flex-1 overflow-y-auto">
+      <BubbleGroup ref={bubbleGroupRef} className="flex-1 overflow-y-auto pb-2 pr-2">
         {messages.map((message, index) => (
           <Bubble
             key={index}
@@ -64,16 +71,16 @@ export const ChatPanel = () => {
         )}
       </BubbleGroup>
 
-      <form onSubmit={handleSubmit} className="flex gap-2">
+      <form onSubmit={handleSubmit} className="flex gap-2 pr-2">
         <input
           value={input}
           onChange={(event) => setInput(event.target.value)}
           placeholder="Ask about or update a product…"
           disabled={isStreaming}
-          className="h-8 flex-1 rounded-lg border-2 border-border bg-background px-2.5 text-sm outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:opacity-50"
+          className="h-8 flex-1 rounded-lg border-2 border-border px-2.5 text-sm outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:opacity-50"
         />
-        <Button type="submit" disabled={isStreaming || !input.trim()}>
-          Send
+        <Button type="submit" size="icon" disabled={isStreaming || !input.trim()}>
+          <CornerDownLeft />
         </Button>
       </form>
     </div>

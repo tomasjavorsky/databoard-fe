@@ -14,3 +14,12 @@ export function slugify(value: string) {
 export function formatDate(value: string) {
   return new Date(value).toLocaleDateString('cs-CZ')
 }
+
+// Number of calendar days from today to the given "YYYY-MM-DD" date (negative if in the past)
+export function daysUntil(value: string) {
+  const today = new Date()
+  today.setHours(0, 0, 0, 0)
+  const target = new Date(value)
+  target.setHours(0, 0, 0, 0)
+  return Math.round((target.getTime() - today.getTime()) / (1000 * 60 * 60 * 24))
+}
