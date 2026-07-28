@@ -17,6 +17,7 @@ const backendLibraries = [
   'Drizzle ORM',
   'Zod',
   'Supabase',
+  'MCP server'
 ]
 
 const About = () => {
