@@ -4,6 +4,7 @@ import type { ColumnDef } from '@tanstack/react-table'
 
 import { ChatPanel } from '@/components/ChatPanel'
 import { DataTable } from '@/components/DataTable'
+import { PageHeader } from '@/components/PageHeader'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import {
@@ -95,8 +96,8 @@ const Index = () => {
 
   return (
     <div className="space-y-4">
-      <h1 className="text-xl font-semibold mb-6">Warehouse Overview</h1>
-      <div className="bg-background shadow-[0px_0px_20px_5px_rgba(255,255,255,1)]">
+      <PageHeader title="Warehouse Overview" />
+      <div>
         <DataTable columns={columns} data={data} />
       </div>
     </div>

@@ -1,5 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { Bubble, BubbleContent, BubbleGroup } from '@/components/ui/bubble'
+import { PageHeader } from '@/components/PageHeader'
 
 const frontendLibraries = [
   'React',
@@ -20,8 +21,8 @@ const backendLibraries = [
 
 const About = () => {
   return (
-    <div>
-      <h1>About</h1>
+    <div className="flex flex-col gap-4">
+      <PageHeader title="About" />
       <section>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
@@ -32,36 +33,26 @@ const About = () => {
           pariatur.
         </p>
       </section>
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-        <div className="max-w-[250px]">
-          <h2>Frontend</h2>
-          <BubbleGroup className="mt-2">
-            {frontendLibraries.map((library, index) => (
-              <Bubble
-                key={library}
-                variant="outline"
-                align={index % 2 === 1 ? 'end' : 'start'}
-              >
-                <BubbleContent>{library}</BubbleContent>
-              </Bubble>
-            ))}
-          </BubbleGroup>
-        </div>
-        <div className="max-w-[300px]">
-          <h2>Backend</h2>
-          <BubbleGroup className="mt-2">
-            {backendLibraries.map((library, index) => (
-              <Bubble
-                key={library}
-                variant="outline"
-                align={index % 2 === 1 ? 'end' : 'start'}
-              >
-                <BubbleContent>{library}</BubbleContent>
-              </Bubble>
-            ))}
-          </BubbleGroup>
-        </div>
-      </div>
+      <section>
+        <BubbleGroup className="flex flex-row flex-wrap gap-4">
+          {frontendLibraries.map((library) => (
+            <Bubble
+              key={library}
+              variant="outline"
+            >
+              <BubbleContent>{library}</BubbleContent>
+            </Bubble>
+          ))}
+          {backendLibraries.map((library) => (
+            <Bubble
+              key={library}
+              variant="outline"
+            >
+              <BubbleContent>{library}</BubbleContent>
+            </Bubble>
+          ))}
+        </BubbleGroup>
+      </section>
     </div>
   )
 }

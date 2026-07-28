@@ -29,7 +29,7 @@ export const ChatPanel = () => {
           <Bubble
             key={index}
             align={message.role === 'user' ? 'end' : 'start'}
-            variant={message.role === 'user' ? 'default' : 'muted'}
+            variant={message.role === 'user' ? 'muted' : 'default'}
           >
             <BubbleContent>
               {message.role === 'assistant' ? <ChatMarkdown content={message.content} /> : message.content}
@@ -38,7 +38,7 @@ export const ChatPanel = () => {
         ))}
 
         {streamingText && (
-          <Bubble align="start" variant="muted">
+          <Bubble align="start" variant="default">
             <BubbleContent>
               <ChatMarkdown content={streamingText} />
             </BubbleContent>
@@ -46,7 +46,7 @@ export const ChatPanel = () => {
         )}
 
         {toolStatus && (
-          <Bubble align="start" variant="ghost">
+          <Bubble align="start" variant="default">
             <BubbleContent
               className={toolStatus.isError ? 'text-destructive' : 'text-muted-foreground'}
             >
@@ -70,7 +70,7 @@ export const ChatPanel = () => {
           onChange={(event) => setInput(event.target.value)}
           placeholder="Ask about or update a product…"
           disabled={isStreaming}
-          className="h-8 flex-1 rounded-lg border border-border bg-background px-2.5 text-sm outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:opacity-50"
+          className="h-8 flex-1 rounded-lg border-2 border-border bg-background px-2.5 text-sm outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:opacity-50"
         />
         <Button type="submit" disabled={isStreaming || !input.trim()}>
           Send
