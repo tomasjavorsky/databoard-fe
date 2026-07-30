@@ -50,7 +50,6 @@
   --color-badge-ready: var(--badge-ready);
   --color-badge-needs-attention: var(--badge-needs-attention);
   --color-badge-harvested: var(--badge-harvested);
-  --color-badge-harvested-foreground: var(--badge-harvested-foreground);
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
@@ -97,14 +96,13 @@
   --bubble-shadow: #ffb2cb;
   --bubble-shadow-muted: #c7c7c7;
   --button-background: #cdf3dd;
-  --button-background-active: #80deea;
+  --button-background-active: #96e6b8;
   --button-foreground: #000000;
   --button-shadow: #ff4081;
   --badge-growing: #6ec0cb;
   --badge-ready: #00c853;
   --badge-needs-attention: #ff4081;
   --badge-harvested: #5d4037;
-  --badge-harvested-foreground: oklch(0.556 0 0);
 }
 
 .dark {
@@ -143,7 +141,6 @@
   --badge-ready: oklch(76.5% 0.177 163.223);
   --badge-needs-attention: oklch(82.8% 0.189 84.429);
   --badge-harvested: oklch(0.269 0 0);
-  --badge-harvested-foreground: oklch(0.708 0 0);
 }
 
 @layer base {
